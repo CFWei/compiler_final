@@ -60,9 +60,9 @@ int temp_register_num=50;
 int tm_code_linenum=0;
 char deliever[3];
 int register_table[7];
-int branch_count[10][2];
+int branch_count[20][2];
 int branch_control=-1;
-int branch_instruction[10];
+int branch_instruction[20];
 FILE *f;
 
 //以下為函式的宣告

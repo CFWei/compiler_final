@@ -1,0 +1,13 @@
+int main()
+	{
+		int a;
+		int b;
+		b=0;
+		for(a=0;a<11;a++)
+			{
+				b=b+1;	
+			
+			}
+		output(b);
+	
+	}

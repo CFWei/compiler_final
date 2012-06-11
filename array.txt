@@ -1,0 +1,12 @@
+int main()
+	{
+		int a[10];
+		int b;
+		int c;
+		input(b);
+		a[2]=b;
+		c=a[2];
+		output(a[2]);
+		output(c);
+	
+	}

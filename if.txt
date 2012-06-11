@@ -1,0 +1,17 @@
+int main()
+	{
+		int a;
+		int b;
+		int c;
+		b=50;
+		c=0;
+		input(a);
+		if(a>10)
+			{
+				b=0;
+				if(b==0)
+						c=1;
+			}
+		output(b);
+		output(c);
+	}

@@ -1,0 +1,17 @@
+
+int main()
+	{	
+		int a;
+		int b;
+		b=12;
+		a=0;
+		while(b>0)
+			{
+				a= a + 1;
+				b= b - 1;
+			}
+		output(a);
+		
+		
+	
+	}

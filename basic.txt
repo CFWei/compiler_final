@@ -1,0 +1,15 @@
+int main()
+	{
+		int a;
+		int b;
+		int c;
+		input(a);
+		c=10;
+		b=90;
+		
+		a= a + c*b - b/c;
+		
+		output(a);
+		
+	
+	}
