@@ -20,7 +20,7 @@ line \n
 						++lineno;
 					}
 "-"					{ 
-						printf("minus\n");
+					
 						return '-';
 					}
 {integer}			{ 	
