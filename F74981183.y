@@ -1088,7 +1088,7 @@ void convert_instruction()
 //寫入obj.tm的函式
 void print_obj_tm(char operator[],char rs[],char rt[],char rd[],int type)
 	{	
-		
+		//依照格式寫進obj.tm當中
 		if(type==1)
 			{
 				fprintf(f,"%d: %s %s,%s,%s\n",tm_code_linenum,operator,rs,rt,rd);
@@ -1128,7 +1128,7 @@ void convert_tmcode()
 		for(i=0;i<i_table_sp;i++)
 			{	
 				//依照instruction裡面operator的不同 將其轉成對應的指令
-				if(strcmp(i_table[i].operator,"Input")==0)
+				if(strcmp(i_table[i].operator,"Input")==0)//加入input的指令
 					{
 						print_obj_tm("IN","1","0","0",1);
 						int num;
@@ -1141,7 +1141,7 @@ void convert_tmcode()
 							sprintf(temp,"%d",(s_table[num].addr+i_table[i].arg2.type));
 						print_obj_tm("ST","1",temp,"0",2);
 					}
-				else if(strcmp(i_table[i].operator,"Load")==0)
+				else if(strcmp(i_table[i].operator,"Load")==0)//加入LD指令
 					{	
 						int num;
 						char temp[10];
@@ -1154,7 +1154,7 @@ void convert_tmcode()
 							sprintf(temp,"%d",(s_table[num].addr+i_table[i].arg2.type));
 						print_obj_tm("LD",i_table[i].arg1.name,temp,"0",2);
 					}
-				else if(strcmp(i_table[i].operator,"Stor")==0)
+				else if(strcmp(i_table[i].operator,"Stor")==0)//加入ST指令
 					{
 						int num;
 						char temp[10];
@@ -1166,34 +1166,34 @@ void convert_tmcode()
 							sprintf(temp,"%d",(s_table[num].addr+i_table[i].arg2.type));
 						print_obj_tm("ST",i_table[i].arg1.name,temp,"0",2);
 					}
-				else if(strcmp(i_table[i].operator,"Mul")==0)
+				else if(strcmp(i_table[i].operator,"Mul")==0)//加入MUL指令
 					{	
 						
 						print_obj_tm("MUL",i_table[i].arg1.name,i_table[i].arg1.name,i_table[i].arg2.name,1);
 					}
-				else if(strcmp(i_table[i].operator,"Sub")==0)
+				else if(strcmp(i_table[i].operator,"Sub")==0)//加入Sub指令
 					{
 					
 						print_obj_tm("SUB",i_table[i].arg1.name,i_table[i].arg1.name,i_table[i].arg2.name,1);
 					}
-				else if(strcmp(i_table[i].operator,"Add")==0)
+				else if(strcmp(i_table[i].operator,"Add")==0)//加入Add指令
 					{
 			
 						print_obj_tm("ADD",i_table[i].arg1.name,i_table[i].arg1.name,i_table[i].arg2.name,1);
 					
 					}
-				else if(strcmp(i_table[i].operator,"Div")==0)
+				else if(strcmp(i_table[i].operator,"Div")==0)//加入Div指令
 					{
 
 						print_obj_tm("DIV",i_table[i].arg1.name,i_table[i].arg1.name,i_table[i].arg2.name,1);
 					}
-				else if(strcmp(i_table[i].operator,"Loadc")==0)
+				else if(strcmp(i_table[i].operator,"Loadc")==0)//加入Loadc的指令
 					{
 					
 						print_obj_tm("LDC",i_table[i].arg1.name,i_table[i].arg2.name,"0",1);
 					
 					}
-				else if(strcmp(i_table[i].operator,"Output")==0)	
+				else if(strcmp(i_table[i].operator,"Output")==0)//加入Output指令
 					{
 						int num;
 						char temp[10];
@@ -1282,21 +1282,28 @@ int get_register()
 int main()
 	{
 		int i;
+		//起始記錄register的table
 		for(i=0;i<7;i++)
 			{
 				register_table[i]=0;
 			
 			}
+		//起始記錄branch的table
 		for(i=0;i<10;i++)
 			{
 				branch_count[i][0]=0;
 				branch_count[i][1]=0;
-			}	
+			}
+		//開始parse
 		yyparse();
+		//印出quadruple
 		print_q_table();
+		//將quadruple轉換成instruction
 		convert_instruction();
 		//print_i_table();
 		//show_symbol_table();
+		
+		//將instruction轉換成tmcode
 		convert_tmcode();
 		return 0;	
 	 }
